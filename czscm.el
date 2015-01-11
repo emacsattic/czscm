@@ -7,7 +7,7 @@
 ;; Keywords: interpreters, languages, scheme, lisp
 ;; Created: 1997-06-19
 
-;; $Id: czscm.el,v 1.6 1997/06/30 12:55:25 friedman Exp $
+;; $Id: czscm.el,v 1.7 2013/07/02 19:04:00 friedman Exp $
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,9 +20,7 @@
 ;; GNU General Public License for more details.
 ;;
 ;; You should have received a copy of the GNU General Public License
-;; along with this program; if not, you can either send email to this
-;; program's maintainer or write to: The Free Software Foundation,
-;; Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
@@ -241,12 +239,12 @@
 ;; binding of local variables in the eval loop cannot have any side effects
 ;; on either the lisp or scheme world.
 (defmacro in-czscm (&rest bodyforms)
-  (` (let ((result nil)
-           (bodyforms '(, bodyforms)))
-       (while bodyforms
-         (setq result (czscm-eval (car bodyforms)))
-         (setq bodyforms (cdr bodyforms)))
-       result)))
+  `(let ((result nil)
+         (bodyforms ',bodyforms))
+     (while bodyforms
+       (setq result (czscm-eval (car bodyforms)))
+       (setq bodyforms (cdr bodyforms)))
+     result))
 
 
 ;;; Top-level evaluator routines
